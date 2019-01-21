@@ -3,12 +3,10 @@ import styled, { keyframes } from 'styled-components';
 const loading = keyframes`
   from {
     background-position: 0 0;
-    /* rotate: 0; */
   }
 
   to {
     background-position: 100% 100%;
-    /* rotate: 360deg; */
   }
 `;
 
@@ -39,7 +37,7 @@ const Form = styled.form`
   button,
   input[type='submit'] {
     width: auto;
-    background: red;
+    background: #35A2C9;
     color: white;
     border: 0;
     font-size: 2rem;
