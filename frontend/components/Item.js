@@ -35,7 +35,7 @@ class Item extends Component {
             <a>Edit </a>
           </Link>
           <button>Add To Cart</button>
-          <DeleteItem>Delete</DeleteItem>
+          <DeleteItem id={item.id}>Delete</DeleteItem>
         </div>
       </ItemStyles>
     );
