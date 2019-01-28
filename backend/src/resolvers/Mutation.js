@@ -45,7 +45,7 @@ const Mutations = {
     // delete
     return ctx.db.mutation.deleteItem({ where }, info);
   },
-  async signup(parent, args, ctx, info) {
+  async register(parent, args, ctx, info) {
     args.email = args.email.toLowerCase();
 
     // Hash password (password, length)
@@ -73,6 +73,31 @@ const Mutations = {
     });
 
     // Return user to the browser
+    return user;
+  },
+  async signin(parent, { email, password }, ctx, info) {
+    // Check if user exists with that email
+    const user = await ctx.db.query.user({ where: { email } });
+    if (!user) {
+      throw new Error(`${email} - No user with that email exists.`);
+    }
+
+    // Check if password is correct, compare the hashes
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) {
+      throw new Error("You have entered an invalid username or password.");
+    }
+
+    // Create JWT token
+    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+
+    // Set cookie with the token
+    ctx.response.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 30 // 1 month cookie
+    });
+
+    // Return user
     return user;
   }
 };
