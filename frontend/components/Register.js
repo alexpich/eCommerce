@@ -3,6 +3,7 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import Form from "./styles/Form";
 import Error from "./ErrorMessage";
+import { CURRENT_USER_QUERY } from "./User";
 
 const REGISTER_MUTATION = gql`
   mutation REGISTER_MUTATION(
@@ -31,7 +32,11 @@ class Register extends Component {
 
   render() {
     return (
-      <Mutation mutation={REGISTER_MUTATION} variables={this.state}>
+      <Mutation
+        mutation={REGISTER_MUTATION}
+        variables={this.state}
+        refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+      >
         {(register, { error, loading }) => {
           return (
             <Form
