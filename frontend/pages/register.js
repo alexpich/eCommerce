@@ -1,4 +1,5 @@
-import Signup from "../components/Signup";
+import Register from "../components/Register";
+import Signin from "../components/Signin";
 import styled from "styled-components";
 
 const Columns = styled.div`
@@ -7,10 +8,11 @@ const Columns = styled.div`
   grid-gap: 20px;
 `;
 
-const Register = props => (
+const register = props => (
   <Columns>
-    <Signup />
+    <Register />
+    <Signin />
   </Columns>
 );
 
-export default Register;
+export default register;
