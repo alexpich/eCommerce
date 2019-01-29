@@ -1,9 +1,9 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { randomBytes } = require("crypto");
-
 // Takes callback based functions and turns them into promise based functions
 const { promisify } = require("util");
+const { transport, createEmailTemplate } = require("../mail");
 
 const Mutations = {
   async createItem(parent, args, ctx, info) {
@@ -123,10 +123,21 @@ const Mutations = {
       where: { email: args.email },
       data: { resetToken, resetTokenExpiry }
     });
-    console.log(res);
-    return { message: "Success" };
 
     // Email reset token
+    const mailRes = await transport.sendMail({
+      from: "test@gmail.com",
+      to: user.email,
+      subject: "Password Reset Link",
+      html: createEmailTemplate(
+        `Your password reset token is: \n\n <a href="${
+          process.env.FRONTEND_URL
+        }/reset?resetToken=${resetToken}">Click here to reset</a>`
+      )
+    });
+
+    // Return message
+    return { message: "Success" };
   },
   async resetPassword(parent, args, ctx, info) {
     // Check if passwords match
