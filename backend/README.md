@@ -1,6 +1,6 @@
 # ECommerce
 
-Back end side of an eCommerce web application that uses React, GraphQL, Next, and Apollo.
+An eCommerce web application that uses React, GraphQL, Next, and Apollo.
 
 ## Getting Started
 
@@ -8,22 +8,35 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 
+Installing the front end
+
 ```sh
+cd frontend
 npm install
 npm run dev
 ```
 
-Create variables.env and fill in 
+Installing the back end
+
+```sh
+cd backend
+npm install
+npm run dev
+```
+
+Create variables.env in /backend
 
 ```sh
 FRONTEND_URL="http://localhost:7777"
-PRISMA_ENDPOINT=""
-PRISMA_SECRET=""
-APP_SECRET=""
-STRIPE_SECRET=""
+PRISMA_ENDPOINT="<your prisma endpoint>"
+PRISMA_SECRET="<your prisma secret>"
+APP_SECRET="<your app secret>"
+STRIPE_SECRET="<your stripe secret>"
 PORT=4444
-MAIL_HOST=""
-MAIL_PORT=
-MAIL_USER=""
-MAIL_PASSWORD=""
+MAIL_HOST="<your mail host>"
+MAIL_PORT=2525
+MAIL_USER="<your mail username>"
+MAIL_PASSWORD="<your mail password>"
 ```
+
+Then open http://localhost:7777/ to see your app.
